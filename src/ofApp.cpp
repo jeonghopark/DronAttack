@@ -14,7 +14,7 @@ void ofApp::setup(){
 
     
     ofxJSONElement _drondata;
-    _drondata.open("dropAttack_08102015.json");
+    _drondata.open("dropAttack_08102015_edit.json");
     
     ofxJSONElement _dronStrike = _drondata["strike"];
     
@@ -23,15 +23,15 @@ void ofApp::setup(){
     dronData.resize(_dronStrike.size());
     for (int i=0; i<_dronStrike.size(); i++){
         
-        float _lat = _dronStrike[i]["lat"].asFloat();
-        float _lon = _dronStrike[i]["lon"].asFloat();
+        float _lon = ofToFloat(_dronStrike[i]["lon"].asString());
+        float _lat = ofToFloat(_dronStrike[i]["lat"].asString());
         
-        float _d = _dronStrike[i]["deaths_max"].asFloat();
+        float _d = ofToFloat(_dronStrike[i]["deaths_max"].asString());
         
         ofVec3f _v;
         _v.x = _radiusEarth * cos(ofDegToRad(_lat)) * cos(ofDegToRad(_lon));
         _v.y = _radiusEarth * cos(ofDegToRad(_lat)) * sin(ofDegToRad(_lon));
-        _v.z = _radiusEarth *sin(ofDegToRad(_lat));
+        _v.z = _radiusEarth * sin(ofDegToRad(_lat));
         
         dronData[i].deathMax = _d;
         dronData[i].coord = _v;
@@ -58,7 +58,7 @@ void ofApp::setup(){
             ofVec3f _v;
             _v.x = _radiusEarth * cos(ofDegToRad(_lat)) * cos(ofDegToRad(_lon));
             _v.y = _radiusEarth * cos(ofDegToRad(_lat)) * sin(ofDegToRad(_lon));
-            _v.z = _radiusEarth *sin(ofDegToRad(_lat));
+            _v.z = _radiusEarth * sin(ofDegToRad(_lat));
             
             
             _p.addVertex( _v );
