@@ -1,6 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
+#include "GuiApp.h"
+#include "BaseArch.h"
 
 #include "ofxJSON.h"
 
@@ -30,16 +32,20 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		
-    
-    vector<DronData> dronData;
-    
-    vector< ofPolyline > oceanLineCoord;
+    shared_ptr<GuiApp> gui;
+    BaseArch baseArch;
 
+    
+
+    ofEasyCam easyCam;
     ofFbo earthFbo;
 //    ofxPostGlitch glitchEffect;
     
+    vector<DronData> dronData;
+
+    vector<ofPolyline> oceanLineCoord;
+
     float mainOffSetXPos, mainOffSetYPos;
 
-    ofEasyCam easyCam;
     
 };

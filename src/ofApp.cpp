@@ -5,10 +5,11 @@ void ofApp::setup(){
     
     ofBackground( 0 );
     
-//    mainOffSetXPos = (ofGetWidth() - (baseArch.fassadeCorner[0].x + baseArch.fassadeCorner[1].x)) * 0.5;
-//    mainOffSetYPos = (ofGetHeight() - (baseArch.fassadeCorner[0].y + baseArch.fassadeCorner[3].y)) * 0.5;
-//    baseArch.mainOffSetXPos = mainOffSetXPos;
-//    baseArch.mainOffSetYPos = mainOffSetYPos;
+    mainOffSetXPos = (ofGetWidth() - (baseArch.fassadeCorner[0].x + baseArch.fassadeCorner[1].x)) * 0.5;
+    mainOffSetYPos = (ofGetHeight() - (baseArch.fassadeCorner[0].y + baseArch.fassadeCorner[3].y)) * 0.5;
+    
+    baseArch.mainOffSetXPos = mainOffSetXPos;
+    baseArch.mainOffSetYPos = mainOffSetYPos;
 
     earthFbo.allocate(ofGetWidth(), ofGetHeight());
 
@@ -107,6 +108,20 @@ void ofApp::draw(){
     
     easyCam.end();
     
+    
+    ofPushMatrix();
+    
+    ofTranslate( mainOffSetXPos, mainOffSetYPos );
+    
+    baseArch.guideFrames( ofColor(0) );
+    baseArch.drawEdgeCover( ofColor(0) );
+    baseArch.guideLines( ofColor(255, 0, 0) );
+    baseArch.guidePoints( ofColor(255, 0, 0, 120) );
+    baseArch.guideCrossPoints( ofColor(255, 0, 0) );
+    
+    ofPopMatrix();
+    
+
 }
 
 //--------------------------------------------------------------
@@ -151,6 +166,12 @@ void ofApp::mouseExited(int x, int y){
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
+
+    mainOffSetXPos = (ofGetWidth() - (baseArch.fassadeCorner[0].x + baseArch.fassadeCorner[1].x)) * 0.5;
+    mainOffSetYPos = (ofGetHeight() - (baseArch.fassadeCorner[0].y + baseArch.fassadeCorner[3].y)) * 0.5;
+    
+    baseArch.mainOffSetXPos = mainOffSetXPos;
+    baseArch.mainOffSetYPos = mainOffSetYPos;
 
 }
 
