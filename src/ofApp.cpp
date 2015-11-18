@@ -71,6 +71,8 @@ void ofApp::setup(){
     }
 
 
+    easyCam.setAutoDistance(false);
+    easyCam.setDistance(2000);
 
 }
 
